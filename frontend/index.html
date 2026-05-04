@@ -5,7 +5,30 @@
 </head>
 <body>
 
-  <h1>TOKIWA funcionando</h1>
+  <h1>TOKIWA</h1>
+
+  <textarea id="texto" placeholder="Escribe aquí..."></textarea>
+
+  <br><br>
+
+  <select id="idioma">
+    <option value="ingles">Inglés</option>
+    <option value="frances">Francés</option>
+  </select>
+
+  <select id="tono">
+    <option value="formal">Formal</option>
+    <option value="informal">Informal</option>
+    <option value="profesional">Profesional</option>
+  </select>
+
+  <br><br>
+
+  <button onclick="traducir()">Traducir</button>
+
+  <pre id="resultado"></pre>
+
+  <script src="script.js"></script>
 
 </body>
 </html>
