@@ -12,7 +12,7 @@ import java.util.HashMap;
 @Service
 public class TranslatorService {
 
-    private final String OLLAMA_URL = "http://localhost:11434/api/generate";
+    private final String OLLAMA_URL = "https://phonics-deferral-deserving.ngrok-free.dev/api/generate";
     private final RestTemplate restTemplate = new RestTemplate();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -45,6 +45,7 @@ public class TranslatorService {
     private String llamarOllama(String prompt) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("ngrok-skip-browser-warning", "true");
 
         Map<String, Object> body = new HashMap<>();
         body.put("model", "mistral");
