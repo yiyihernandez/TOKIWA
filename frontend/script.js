@@ -11,7 +11,7 @@ async function traducir() {
     document.getElementById("resultado").innerText = "Cargando...";
 
     try {
-        const res = await fetch("https://barn-rundown-numbly.ngrok-free.dev/api/traducir", {
+        const res = await fetch("https://phonics-deferral-deserving.ngrok-free.dev/api/traducir", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -1,1 +1,1 @@
-# TOKIWA
+curl -X POST http://localhost:8080/traducir -H "Content-Type: application/json" -d "{\"texto\":\"Hola, como estas\",\"idioma\":\"ingles\",\"tono\":\"formal\"}"# TOKIWA

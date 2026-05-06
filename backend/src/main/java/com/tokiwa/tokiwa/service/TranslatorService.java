@@ -1,18 +1,23 @@
 package com.tokiwa.tokiwa.service;
 
-import com.tokiwa.tokiwa.model.TranslationRequest;
-import com.tokiwa.tokiwa.model.TranslationResponse;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.http.*;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.Map;
-import java.util.HashMap;
+import com.tokiwa.tokiwa.model.TranslationRequest;
+import com.tokiwa.tokiwa.model.TranslationResponse;
 
 @Service
 public class TranslatorService {
 
-    private final String OLLAMA_URL = "https://phonics-deferral-deserving.ngrok-free.dev/api/generate";
+    private final String OLLAMA_URL = "http://localhost:11434/api/generate";
     private final RestTemplate restTemplate = new RestTemplate();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -22,25 +27,37 @@ public class TranslatorService {
         return parsearRespuesta(respuestaJson, request);
     }
 
-    private String construirPrompt(TranslationRequest request) {
-        return String.format(
-            "Eres TOKIWA, un traductor contextual inteligente. No traduces palabra por palabra, " +
-            "adaptas el significado segun el contexto y el tono indicado. Datos de entrada:\n\n" +
-            "* Texto original: \"%s\"\n" +
-            "* Idioma destino: \"%s\" (espanol, ingles, frances, japones o portugues)\n" +
-            "* Tono: \"%s\" (formal = educado y respetuoso, informal = relajado y cercano, " +
-            "profesional = directo, breve y orientado a accion)\n\n" +
-            "REGLA CRITICA: el campo 'alternativa' es una segunda traduccion obligatoria con vocabulario " +
-            "diferente a la traduccion principal. Ejemplo: traduccion = 'Hola, recibiste lo que te mande?' " +
-            "y alternativa = 'Oye, te llego lo que te envie?'. Son dos oraciones distintas, ninguna va " +
-            "dentro de la explicacion. El campo confianza es un numero entero entre 80 y 99. " +
-            "Responde UNICAMENTE con este JSON, sin texto adicional, sin markdown:\n" +
-            "{\"traduccion\": \"\", \"explicacion\": \"\", \"alternativa\": \"\", \"confianza\": 0}",
-            request.getTexto(),
-            request.getIdioma(),
-            request.getTono()
-        );
-    }
+ private String construirPrompt(TranslationRequest request) {
+    return String.format(
+        "Actua como TOKIWA, experto en traduccion transcultural para espanol, ingles, frances, japones y portugues. " +
+        "Tu objetivo es la equivalencia dinamica (sentido), no la literalidad.\n\n" +
+        "ENTRADA:\n" +
+        "- Texto original: \"%s\"\n" +
+        "- Idioma destino: %s\n" +
+        "- Tono: %s (informal = coloquial y natural; formal = gramatica perfecta y respetuoso; profesional = lexico corporativo y ejecutivo)\n\n" +
+        "REGLAS CRITICAS:\n" +
+        "1. 'traduccion': Texto adaptado al tono indicado en %s. No traduzcas literalmente.\n" +
+        "2. 'explicacion': Maximo 2 oraciones explicando por que elegiste esas palabras. " +
+        "Escrita OBLIGATORIAMENTE en el mismo idioma del texto original. " +
+        "No menciones la alternativa aqui.\n" +
+        "3. 'alternativa': OBLIGATORIO, nunca vacio. Segunda traduccion en %s con sinonimos diferentes a la traduccion principal. " +
+        "Es una oracion independiente, no va dentro de la explicacion.\n" +
+        "4. 'confianza': Numero entero entre 80 y 99 segun la claridad del contexto.\n" +
+        "5. Si el texto original no tiene sentido, no es una palabra real o no puede ser traducido con precision, " +
+        "responde con este JSON exacto sin inventar traducciones:\n" +
+        "{\"traduccion\": \"El texto ingresado no es valido o no tiene significado reconocible.\", " +
+        "\"explicacion\": \"El texto no corresponde a ninguna palabra o frase en un idioma reconocido.\", " +
+        "\"alternativa\": \"Por favor ingresa un texto con sentido para obtener una traduccion.\", " +
+        "\"confianza\": 0}\n\n" +
+        "RESPONDE UNICAMENTE CON ESTE JSON, sin markdown, sin texto extra, sin explicaciones fuera del JSON:\n" +
+        "{\"traduccion\": \"\", \"explicacion\": \"\", \"alternativa\": \"\", \"confianza\": 0}",
+        request.getTexto(),
+        request.getIdioma(),
+        request.getTono(),
+        request.getIdioma(),
+        request.getIdioma()
+    );
+}
 
     private String llamarOllama(String prompt) {
         HttpHeaders headers = new HttpHeaders();
