@@ -14,8 +14,7 @@ async function traducir() {
         const res = await fetch("http://localhost:8080/api/traducir", {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'ngrok-skip-browser-warning': 'true'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 texto: texto,
