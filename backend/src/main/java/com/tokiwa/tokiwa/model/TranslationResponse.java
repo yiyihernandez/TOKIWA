@@ -1,3 +1,4 @@
+
 package com.tokiwa.tokiwa.model;
 
 import lombok.Data;

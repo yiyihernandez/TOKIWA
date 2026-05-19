@@ -1,3 +1,6 @@
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.Data;
 package com.tokiwa.tokiwa.model;
 
 import jakarta.validation.constraints.NotBlank;
