@@ -27,28 +27,48 @@ public class TranslatorService implements ITranslatorService {
         return parsearRespuesta(respuestaJson, request);
     }
 
- private String construirPrompt(TranslationRequest request) {
-    return String.format(
+        private String construirPrompt(TranslationRequest request) {
+        return String.format(
         "Actua como TOKIWA, experto en traduccion transcultural para espanol, ingles, frances, japones y portugues. " +
-        "Tu objetivo es la equivalencia dinamica (sentido), no la literalidad.\n\n" +
+        "Tu objetivo es la equivalencia dinamica (sentido y cultura), no la literalidad.\n\n" +
         "ENTRADA:\n" +
         "- Texto original: \"%s\"\n" +
         "- Idioma destino: %s\n" +
-        "- Tono: %s (informal = coloquial y natural; formal = gramatica perfecta y respetuoso; profesional = lexico corporativo y ejecutivo)\n\n" +
+        "- Tono: %s\n\n" +
+        "REGLAS DE TONO:\n" +
+        "- informal: coloquial, natural, puede incluir groserias o expresiones vulgares si el texto original las contiene.\n" +
+        "- formal: gramatica perfecta, respetuoso, sustituye groserias por expresiones educadas equivalentes.\n" +
+        "- profesional: lexico corporativo y ejecutivo, elimina cualquier vulgaridad y reformula con lenguaje neutro.\n\n" +
         "REGLAS CRITICAS:\n" +
-        "1. 'traduccion': Texto adaptado al tono indicado en %s. No traduzcas literalmente.\n" +
-        "2. 'explicacion': Maximo 2 oraciones explicando por que elegiste esas palabras. " +
+        "1. 'traduccion': Texto adaptado al tono indicado en %s. No traduzcas literalmente. " +
+        "Respeta el nivel de vulgaridad o formalidad segun el tono.\n" +
+        "2. 'explicacion': Maximo 2 oraciones explicando por que elegiste esas palabras y como adaptaste el tono. " +
         "Escrita OBLIGATORIAMENTE en el mismo idioma del texto original. " +
         "No menciones la alternativa aqui.\n" +
-        "3. 'alternativa': OBLIGATORIO, nunca vacio. Segunda traduccion en %s con sinonimos diferentes a la traduccion principal. " +
+        "3. 'alternativa': OBLIGATORIO, nunca vacio. Segunda traduccion en %s con sinonimos o estructura diferente. " +
+        "Si el texto es corto, busca otra expresion equivalente en el idioma destino. " +
+        "Mantiene el mismo nivel de tono que la traduccion principal. " +
         "Es una oracion independiente, no va dentro de la explicacion.\n" +
         "4. 'confianza': Numero entero entre 80 y 99 segun la claridad del contexto.\n" +
-        "5. Si el texto original no tiene sentido, no es una palabra real o no puede ser traducido con precision, " +
-        "responde con este JSON exacto sin inventar traducciones:\n" +
+        "5. Para japones: usa hiragana, katakana y kanji estandar. " +
+        "No uses transliteraciones como 'haro' o 'heroo'. " +
+        "La traduccion debe ser natural para un hablante nativo japones.\n" +
+        "6. Si el texto original no tiene sentido, no es una palabra real o no puede ser traducido con precision, " +
+        "responde con este JSON exacto:\n" +
         "{\"traduccion\": \"El texto ingresado no es valido o no tiene significado reconocible.\", " +
         "\"explicacion\": \"El texto no corresponde a ninguna palabra o frase en un idioma reconocido.\", " +
         "\"alternativa\": \"Por favor ingresa un texto con sentido para obtener una traduccion.\", " +
         "\"confianza\": 0}\n\n" +
+        "7. Adapta culturalmente segun el idioma destino:\n" +
+        "- Ingles: distingue entre ingles americano (informal) e ingles britanico (formal).\n" +
+        "- Frances: usa 'vous' para formal/profesional y 'tu' para informal.\n" +
+        "- Japones: usa keigo (lenguaje de respeto) para formal/profesional y lenguaje casual para informal.\n" +
+        "- Portugues: usa portugues de Brasil como referencia principal.\n" +
+        "- Espanol: usa expresiones neutras que se entiendan en cualquier pais hispanohablante.\n\n" +
+        "ADVERTENCIA CRITICA: El campo 'alternativa' debe ser UNICAMENTE una cadena de texto simple, " +
+        "NO un objeto JSON, NO un diccionario, NO llaves {}. " +
+        "Ejemplo correcto: \"alternativa\": \"Otra oracion aqui\" " +
+        "Ejemplo INCORRECTO: \"alternativa\": {\"traduccion\": \"...\", \"explicacion\": \"...\"}\n\n" +
         "RESPONDE UNICAMENTE CON ESTE JSON, sin markdown, sin texto extra, sin explicaciones fuera del JSON:\n" +
         "{\"traduccion\": \"\", \"explicacion\": \"\", \"alternativa\": \"\", \"confianza\": 0}",
         request.getTexto(),
@@ -57,6 +77,7 @@ public class TranslatorService implements ITranslatorService {
         request.getIdioma(),
         request.getIdioma()
     );
+
 }
 
     private String llamarOllama(String prompt) {
