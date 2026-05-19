@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TranslationResponse {
     private String textoOriginal;
-    private String traduccion;
-    private String explicacion;
-    private String alternativa;
-    private int confianza;
+    private String textoTraducido;
+    private String explicacion = "";
+    private String alternativa = "";
+    private double confianza;
     private String idioma;
     private String tono;
 }
