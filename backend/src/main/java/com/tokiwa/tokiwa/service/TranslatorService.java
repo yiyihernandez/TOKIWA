@@ -15,7 +15,7 @@ import com.tokiwa.tokiwa.model.TranslationRequest;
 import com.tokiwa.tokiwa.model.TranslationResponse;
 
 @Service
-public class TranslatorService {
+public class TranslatorService implements ITranslatorService {
 
     private final String OLLAMA_URL = "http://localhost:11434/api/generate";
     private final RestTemplate restTemplate = new RestTemplate();

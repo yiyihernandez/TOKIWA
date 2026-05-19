@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.tokiwa.tokiwa.service.ITranslatorService;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class TranslatorController {
 
     @Autowired
-    private TranslatorService translatorService;
+    private ITranslatorService translatorService;
 
     @PostMapping("/traducir")
     public TranslationResponse traducir(@RequestBody TranslationRequest request) {
