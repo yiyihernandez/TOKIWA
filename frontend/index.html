@@ -1,27 +1,103 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TOKIWA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>TOKIWA</h1>
-  <textarea id="texto" placeholder="Escribe el texto..."></textarea>
-  <br><br>
-  <select id="idioma">
-    <option value="espanol">Español</option>
-    <option value="ingles">Inglés</option>
-    <option value="frances">Francés</option>
-    <option value="japones">Japonés</option>
-    <option value="portugues">Portugués</option>
-  </select>
-  <select id="tono">
-    <option value="formal">Formal</option>
-    <option value="informal">Informal</option>
-    <option value="profesional">Profesional</option>
-  </select>
-  <br><br>
-  <button onclick="traducir()">Traducir</button>
-  <pre id="resultado"></pre>
+
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- ====== HERO ====== -->
+  <section id="hero">
+    <div id="personaje-wrap">
+      <!-- Orden: de atrás hacia adelante -->
+      <img src="imagen/DRAGON.png"          class="capa capa-dragon"  alt="" draggable="false">
+      <img src="imagen/TOKIWAPERSONAJE.png" class="capa capa-cuerpo"  alt="" draggable="false">
+      <img src="imagen/PARTE1BRAZO.png"     class="capa capa-parte1"  alt="" draggable="false" id="p1">
+      <img src="imagen/PARTE2BRAZO.png"     class="capa capa-parte2"  alt="" draggable="false" id="p2">
+      <img src="imagen/MANGABRAZO.png"      class="capa capa-manga"   alt="" draggable="false" id="mg">
+      <img src="imagen/MANOESPADA.png"      class="capa capa-mano"    alt="" draggable="false" id="mn">
+    </div>
+
+    <div id="hero-texto">
+      <h1 id="hero-titulo">TOKIWA</h1>
+      <div id="hero-linea"></div>
+      <p id="hero-sub">Traductor contextual</p>
+    </div>
+
+    <div id="scroll-hint"
+         onclick="document.getElementById('seccion-traductor').scrollIntoView({behavior:'smooth'})">
+      <span>Explorar</span>
+      <div class="flecha"></div>
+      <div class="flecha"></div>
+    </div>
+  </section>
+
+  <!-- ====== TRADUCTOR ====== -->
+  <section id="seccion-traductor">
+    <div class="traductor-wrap">
+
+      <div class="separador">
+        <div class="sep-linea"><span class="sep-icono">⬥ ⬥ ⬥</span></div>
+        <div class="sep-label">Traductor contextual</div>
+      </div>
+
+      <div class="translator">
+        <div class="top-bar">
+          <div class="languages">
+            <select id="idioma">
+              <option value="espanol">Español</option>
+              <option value="ingles">Inglés</option>
+              <option value="frances">Francés</option>
+              <option value="japones">Japonés</option>
+              <option value="portugues">Portugués</option>
+            </select>
+            <select id="tono">
+              <option value="formal">Formal</option>
+              <option value="informal">Informal</option>
+              <option value="profesional">Profesional</option>
+            </select>
+          </div>
+          <button class="switch-btn" title="Intercambiar">⇄</button>
+        </div>
+
+        <div class="main">
+          <div class="panel left">
+            <p class="panel-label">Texto original</p>
+            <textarea id="texto" placeholder="Escribe el texto a traducir..."></textarea>
+            <div class="panel-footer">
+              <div class="icon-buttons">
+                <button class="icon-btn" title="Limpiar" onclick="limpiar()">✕</button>
+                <button class="icon-btn" title="Copiar"  onclick="copiarTexto()">⎘</button>
+              </div>
+              <button class="translate-btn" onclick="traducir()">Traducir</button>
+            </div>
+          </div>
+
+          <div class="panel right">
+            <p class="panel-label">Resultado</p>
+            <div class="output" id="resultado">
+              <span class="resultado-vacio">La traducción aparecerá aquí</span>
+            </div>
+            <div class="panel-footer">
+              <div class="icon-buttons">
+                <button class="icon-btn" title="Copiar resultado" onclick="copiarResultado()">⎘</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ornamento"><span>✦ tokiwa translator ✦</span></div>
+      </div>
+    </div>
+  </section>
+
   <script src="script.js"></script>
 </body>
 </html>
