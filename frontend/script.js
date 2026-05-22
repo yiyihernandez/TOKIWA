@@ -131,7 +131,7 @@ hero.addEventListener('mouseleave', () => {
    WARRIOR — paralaje con el mouse en la sección
 ===================================================== */
 const secTrad   = document.getElementById('seccion-traductor');
-const warriorEl = document.getElementById('warrior-img');
+const warriorEl = document.getElementById('Warriortraductor-img');
 
 secTrad.addEventListener('mousemove', e => {
     const r  = secTrad.getBoundingClientRect();

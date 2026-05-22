@@ -241,9 +241,9 @@ body {
 }
 
 /* WARRIOR — derecha */
-#warrior-wrap {
+#Warriortraductor-wrap {
     position:       absolute;
-    right:          4vw;
+    right:          8vw;
     bottom:         0;
     height:         100%;
     display:        flex;
@@ -251,8 +251,8 @@ body {
     pointer-events: none;
     z-index:        3;
 }
-#warrior-img {
-    height:      100%;
+#Warriortraductor-img {
+    height:      110%;
     width:       auto;
     object-fit:  contain;
     object-position: bottom;
@@ -264,7 +264,7 @@ body {
     transition:  transform 1.3s cubic-bezier(.22,1,.36,1) .2s,
                  opacity   1.3s ease .2s;
 }
-#seccion-traductor.visible #warrior-img {
+#seccion-traductor.visible #Warriortraductor-img {
     opacity:   1;
     transform: translateX(0);
 }
@@ -273,8 +273,8 @@ body {
 #traductor-lado {
     position: relative;
     z-index:  4;
-    width:    min(720px, 58vw);
-    padding:  60px 0 60px 6vw;
+    width:    min(1100px, 100vw);
+    padding:  60px 0 80px 6vw;
 }
 
 /* Header */
@@ -353,6 +353,9 @@ textarea {
     border: none; outline: none; resize: none;
     font-size: 18px; font-family: var(--fb);
     color: var(--blanco); background: transparent; line-height: 1.7;
+    font-size:22px;
+    font-weight:500;
+    letter-spacing:.4px;
 }
 textarea::placeholder { color: #5a2020; font-size: 16px; }
 
@@ -423,4 +426,109 @@ textarea::placeholder { color: #5a2020; font-size: 16px; }
     #warrior-wrap    { display: none; }
     #texto-vertical  { display: none; }
     #seccion-traductor { min-height: auto; }
+}
+/* ===== AJUSTE DE TIPOGRAFÍA GRANDE ===== */
+
+/* texto pequeño arriba de "TRADUCE TU MUNDO" */
+.trad-eyebrow{
+    font-size:18px;
+    letter-spacing:6px;
+
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+}
+
+/* TÍTULO GRANDE se queda con su fuente original */
+.trad-titulo{
+    font-family:'Cinzel Decorative', serif;
+}
+
+/* títulos: TEXTO ORIGINAL, RESULTADO, EXPLICACIÓN... */
+.panel-label,
+.resultado h3,
+.resultado-bloque .etiqueta{
+
+    font-size:25px;
+    font-family:'Cormorant Garamond', serif;
+
+    letter-spacing:3px;
+    font-weight:700;
+
+    margin-bottom:18px;
+}
+
+/* texto principal de resultados */
+.valor{
+
+    font-size:20px !important;
+
+    line-height:2;
+
+    font-family:'Cormorant Garamond', serif;
+
+    color:#fff;
+}
+
+/* explicación MUCHO más grande */
+.explicacion-texto{
+
+    font-size:20px !important;
+
+    line-height:2.3;
+
+    font-family:'Cormorant Garamond', serif;
+
+    color:#d8d8d8;
+
+    width:100%;
+
+    max-width:95%;
+}
+
+/* texto escrito en textarea */
+textarea{
+
+    font-size:20px;
+
+    font-family:'Cormorant Garamond', serif;
+
+    line-height:2;
+}
+
+/* placeholder */
+textarea::placeholder{
+
+    font-size:20px;
+}
+
+/* alternativa */
+.alt-tag{
+
+    font-size:20px;
+
+    font-family:'Cormorant Garamond', serif;
+
+    padding:12px 18px;
+}
+
+/* confianza */
+.confianza-badge{
+
+    font-size:20px;
+
+    padding:10px 16px;
+}
+
+/* selects arriba */
+select{
+
+    font-size:20px;
+
+    font-family:'Cormorant Garamond', serif;
+}
+
+/* botón traducir */
+.translate-btn{
+
+    font-size:18px;
 }
