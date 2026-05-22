@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TOKIWA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Cinzel+Decorative:wght@900&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -13,10 +13,9 @@
   <div id="cursor"></div>
   <div id="cursor-ring"></div>
 
-  <!-- ====== HERO ====== -->
+  <!-- ====== HERO — SIN TOCAR ====== -->
   <section id="hero">
     <div id="personaje-wrap">
-      <!-- Orden: de atrás hacia adelante -->
       <img src="imagen/DRAGON.png"          class="capa capa-dragon"  alt="" draggable="false">
       <img src="imagen/TOKIWAPERSONAJE.png" class="capa capa-cuerpo"  alt="" draggable="false">
       <img src="imagen/PARTE1BRAZO.png"     class="capa capa-parte1"  alt="" draggable="false" id="p1">
@@ -26,7 +25,12 @@
     </div>
 
     <div id="hero-texto">
-      <h1 id="hero-titulo">TOKIWA</h1>
+      <!-- Al hacer clic en TOKIWA baja a la sección traductor -->
+      <h1 id="hero-titulo"
+          onclick="document.getElementById('seccion-traductor').scrollIntoView({behavior:'smooth'})"
+          style="cursor:pointer;">
+        TOKIWA
+      </h1>
       <div id="hero-linea"></div>
       <p id="hero-sub">Traductor contextual</p>
     </div>
@@ -39,13 +43,23 @@
     </div>
   </section>
 
-  <!-- ====== TRADUCTOR ====== -->
+  <!-- ====== SECCIÓN TRADUCTOR — NUEVA, ESTILO ORKEN ====== -->
   <section id="seccion-traductor">
-    <div class="traductor-wrap">
 
-      <div class="separador">
-        <div class="sep-linea"><span class="sep-icono">⬥ ⬥ ⬥</span></div>
-        <div class="sep-label">Traductor contextual</div>
+    <!-- "TOKIWA" gigante vertical a la derecha -->
+    <div id="texto-vertical">TOKIWA</div>
+
+    <!-- WARRIOR entra desde la derecha -->
+    <div id="warrior-wrap">
+      <img src="imagen/WARRIOR.png" id="warrior-img" alt="Warrior" draggable="false">
+    </div>
+
+    <!-- Traductor a la izquierda -->
+    <div id="traductor-lado">
+
+      <div class="trad-header">
+        <p class="trad-eyebrow">Traductor contextual</p>
+        <h2 class="trad-titulo">TRADUCE<br>TU MUNDO</h2>
       </div>
 
       <div class="translator">
@@ -67,34 +81,30 @@
           <button class="switch-btn" title="Intercambiar">⇄</button>
         </div>
 
-        <div class="main">
-          <div class="panel left">
-            <p class="panel-label">Texto original</p>
-            <textarea id="texto" placeholder="Escribe el texto a traducir..."></textarea>
-            <div class="panel-footer">
-              <div class="icon-buttons">
-                <button class="icon-btn" title="Limpiar" onclick="limpiar()">✕</button>
-                <button class="icon-btn" title="Copiar"  onclick="copiarTexto()">⎘</button>
-              </div>
-              <button class="translate-btn" onclick="traducir()">Traducir</button>
-            </div>
-          </div>
+        <div class="panel-input">
+          <p class="panel-label">Texto original</p>
+          <textarea id="texto" placeholder="Escribe el texto a traducir..."></textarea>
+        </div>
 
-          <div class="panel right">
-            <p class="panel-label">Resultado</p>
-            <div class="output" id="resultado">
-              <span class="resultado-vacio">La traducción aparecerá aquí</span>
-            </div>
-            <div class="panel-footer">
-              <div class="icon-buttons">
-                <button class="icon-btn" title="Copiar resultado" onclick="copiarResultado()">⎘</button>
-              </div>
-            </div>
+        <div class="panel-input">
+          <p class="panel-label">Resultado</p>
+          <div class="output" id="resultado">
+            <span class="resultado-vacio">La traducción aparecerá aquí</span>
           </div>
+        </div>
+
+        <div class="trad-footer">
+          <div class="icon-buttons">
+            <button class="icon-btn" title="Limpiar"          onclick="limpiar()">✕</button>
+            <button class="icon-btn" title="Copiar texto"     onclick="copiarTexto()">⎘</button>
+            <button class="icon-btn" title="Copiar resultado" onclick="copiarResultado()">⬒</button>
+          </div>
+          <button class="translate-btn" onclick="traducir()">Traducir</button>
         </div>
 
         <div class="ornamento"><span>✦ tokiwa translator ✦</span></div>
       </div>
+
     </div>
   </section>
 
