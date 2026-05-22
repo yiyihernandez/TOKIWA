@@ -215,25 +215,42 @@ body {
 
 /* "TOKIWA" gigante vertical — derecha */
 #texto-vertical {
-    position:         absolute;
-    right:            18vw;
-    top:              50%;
-    transform:        translateY(-50%);
-    font-family:      'Cinzel Decorative', serif;
-    font-size:        clamp(80px, 13vw, 200px);
-    font-weight:      900;
-    color:            rgba(240,236,228,.14);
-    writing-mode:     vertical-rl;
-    text-orientation: mixed;
-    text-transform:   uppercase;
-    letter-spacing:   -4px;
-    line-height:      1;
-    pointer-events:   none;
-    z-index:          2;
-    /* Entrada */
-    opacity:          0;
-    transition:       opacity 1.4s ease .6s, transform 1.4s ease .6s;
-    transform:        translateY(-45%) translateX(50px);
+
+    position:absolute;
+
+    right:2vw; /* antes 18vw */
+    top:50%;
+
+    transform:translateY(-45%) translateX(80px);
+
+    font-family:'Cinzel Decorative', serif;
+
+    font-size:clamp(80px,13vw,200px);
+
+    font-weight:900;
+
+    color:rgba(240,236,228,.10);
+
+    writing-mode:vertical-rl;
+
+    text-orientation:mixed;
+
+    text-transform:uppercase;
+
+    letter-spacing:10px;
+
+    line-height:1;
+
+    pointer-events:none;
+
+    z-index:2;
+
+    opacity:0;
+
+    transition:
+    opacity 1.4s ease .6s,
+    transform 1.4s cubic-bezier(.22,1,.36,1);
+
 }
 #seccion-traductor.visible #texto-vertical {
     opacity:   1;
@@ -531,4 +548,42 @@ select{
 .translate-btn{
 
     font-size:18px;
+}
+.translate-btn{
+    font-size:18px;
+}
+/* ===== ANIMACIÓN PERSONAJE TRADUCTOR ===== */
+
+#Warriortraductor-img{
+
+    transition:
+        transform 1.2s cubic-bezier(.22,1,.36,1),
+        opacity 1s ease,
+        filter .8s ease;
+
+    transform-origin: bottom center;
+
+}
+
+/* estado normal */
+#seccion-traductor:not(.resultado-activo) #Warriortraductor-img{
+
+    transform:
+        scale(1)
+        translateX(0);
+
+}
+
+/* cuando aparecen resultados */
+#seccion-traductor.resultado-activo #Warriortraductor-img{
+
+    transform:
+        scale(1.12)
+        translateX(-25px);
+
+}
+.switch-btn{
+
+display:none;
+
 }
