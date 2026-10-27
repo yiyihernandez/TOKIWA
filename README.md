@@ -1,28 +1,27 @@
-# TOKIWA 
+# TOKIWA
 
-Traductor contextual con identidad visual inmersiva inspirado en una estética oscura/fantástica.
+A contextual translator with an immersive visual identity, inspired by a dark fantasy aesthetic.
 
-TOKIWA no busca únicamente traducir texto. Su objetivo es adaptar significado, intención y tono para ofrecer resultados más naturales y expresivos.
+TOKIWA goes beyond simple text translation. Its goal is to adapt meaning, intent, and tone to deliver more natural and expressive results.
 
-## ✦ Características
+## Features
 
-- Traducción contextual
-- Ajuste de tono:
-  - Formal
-  - Informal
-  - Profesional
-- Explicación del resultado generado
-- Alternativas sugeridas
-- Indicador de confianza
-- Copiar texto y resultados rápidamente
-- Interfaz visual personalizada
-- Animaciones e interacción dinámica
-- Diseño inmersivo estilo fantasía oscura
+- Contextual translation
+- Tone adjustment:
+- Formal
+- Informal
+- Professional
+- Explanations for generated results
+- Suggested alternatives
+- Confidence indicator
+- Quick-copy functionality for text and results
+- Custom visual interface
+- Animations and dynamic interaction
+- Immersive, dark fantasy-style design
 
 ---
 
-## ✦ Estructura del proyecto
-
+## ✦ Project structure
 ```txt
 TOKIWA/
 │
